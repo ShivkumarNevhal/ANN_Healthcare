@@ -1,8 +1,7 @@
 numpy<2
 pandas
 scikit-learn
-tensorflow==2.15.0
-tensorboard==2.15.2
+tensorflow==2.20.0
 streamlit==1.31.1
 matplotlib
 protobuf<5
