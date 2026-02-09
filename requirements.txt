@@ -1,0 +1,9 @@
+numpy<2
+pandas
+scikit-learn
+scikeras==0.12.0
+tensorflow==2.15.0
+tensorboard==2.15.2
+streamlit==1.31.1
+matplotlib
+protobuf<5
