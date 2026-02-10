@@ -111,10 +111,11 @@ if st.button("🔍 Predict Risk", use_container_width=True):
 
     st.subheader("Prediction Result")
 
-    if probability > 0.05:
+    if probability > 0.5:
         st.error(f"⚠️ High Stroke Risk (Probability: {probability:.2f})")
     else:
         st.success(f"✅ Low Stroke Risk (Probability: {probability:.2f})")
 
     st.progress(probability)
+
 
