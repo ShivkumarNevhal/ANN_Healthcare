@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 # -------------------- LOAD MODEL --------------------
-model = tf.keras.models.load_model("ANN_model/new_model2.h5")
+model = tf.keras.models.load_model("ANN_model/new_model3.h5")
 
 # -------------------- LOAD ENCODERS --------------------
 with open("Label-encoders/LB_encoder_gender.pkl", "rb") as file:
@@ -117,5 +117,6 @@ if st.button("🔍 Predict Risk", use_container_width=True):
         st.success(f"✅ Low Stroke Risk (Probability: {probability:.2f})")
 
     st.progress(probability)
+
 
 
