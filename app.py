@@ -43,14 +43,6 @@ st.markdown("""
     animation: fadeIn 0.8s ease-in-out;
 }
 
-/* Card style */
-.card {
-    padding: 20px;
-    border-radius: 15px;
-    background-color: #f8f9fa;
-    box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
-}
-
 /* Animated result box */
 .result-box {
     padding: 18px;
@@ -99,9 +91,7 @@ st.markdown("<div class='main-title'>🧠 Healthcare Stroke Risk Prediction</div
 st.markdown("<p style='text-align:center;'>Enter patient details to estimate stroke risk using ANN model</p>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
 
-# -------------------- INPUT CARD --------------------
-st.markdown("<div class='card fade-in'>", unsafe_allow_html=True)
-
+# -------------------- USER INPUT --------------------
 col1, col2 = st.columns(2)
 
 with col1:
@@ -118,7 +108,6 @@ with col2:
     bmi = st.number_input("BMI", min_value=0.0)
     smoking_status = st.selectbox("Smoking Status", OHE_smoke.categories_[0])
 
-st.markdown("</div>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
 
 # -------------------- ENCODING --------------------
