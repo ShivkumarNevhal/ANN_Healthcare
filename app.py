@@ -17,10 +17,10 @@ st.markdown(
     """
     <style>
 
-    /* DARK MEDICAL BACKGROUND */
+    /* ===== CLEAR DARK MEDICAL BACKGROUND ===== */
     .stApp {
         background-image:
-            linear-gradient(rgba(6, 20, 35, 0.92), rgba(6, 20, 35, 0.92)),
+            linear-gradient(rgba(6, 20, 35, 0.65), rgba(6, 20, 35, 0.65)),
             url("https://images.unsplash.com/photo-1530026186672-2cd00ffc50fe?q=80&w=1600&auto=format&fit=crop");
         background-size: cover;
         background-position: center;
@@ -28,13 +28,13 @@ st.markdown(
         color: #EAF2F8;
     }
 
-    /* FADE ANIMATION */
+    /* ===== FADE ANIMATION ===== */
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(12px); }
         to { opacity: 1; transform: translateY(0); }
     }
 
-    /* TITLE */
+    /* ===== TITLE ===== */
     .main-title {
         font-size: 40px;
         font-weight: 700;
@@ -43,18 +43,18 @@ st.markdown(
         animation: fadeIn 1s ease-in-out;
     }
 
-    /* GLASS PANEL */
+    /* ===== DARK GLASS PANEL (LESS BLUR) ===== */
     .glass {
         padding: 26px;
         border-radius: 18px;
-        background: rgba(10, 25, 45, 0.75);
-        backdrop-filter: blur(12px);
+        background: rgba(10, 25, 45, 0.55);
+        backdrop-filter: blur(4px);
         border: 1px solid rgba(93, 173, 226, 0.15);
         box-shadow: 0 10px 35px rgba(0,0,0,0.6);
         animation: fadeIn 0.8s ease-in-out;
     }
 
-    /* RESULT BOX */
+    /* ===== RESULT BOX ===== */
     .result-box {
         padding: 18px;
         border-radius: 12px;
@@ -64,7 +64,7 @@ st.markdown(
         animation: fadeIn 0.6s ease-in-out;
     }
 
-    /* BUTTON */
+    /* ===== BUTTON ===== */
     .stButton > button {
         height: 52px;
         border-radius: 10px;
@@ -75,7 +75,7 @@ st.markdown(
         border: none;
     }
 
-    /* INPUT TEXT VISIBILITY */
+    /* ===== INPUT TEXT ===== */
     label, .stSelectbox, .stNumberInput, .stSlider {
         color: #EAF2F8 !important;
     }
@@ -84,6 +84,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 # -------------------- LOAD MODEL --------------------
 model = tf.keras.models.load_model("ANN_model/new_model3.h5")
@@ -190,3 +191,4 @@ if st.button("🔍 Predict Stroke Risk", use_container_width=True):
         </div>
     </div>
     """, unsafe_allow_html=True)
+
