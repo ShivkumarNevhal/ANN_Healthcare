@@ -12,38 +12,46 @@ st.set_page_config(
     layout="centered"
 )
 
-# -------------------- CUSTOM CSS (ANIMATIONS + UI) --------------------
+# -------------------- CUSTOM CSS --------------------
 st.markdown("""
 <style>
 
-/* Fade in animation */
+/* Medical background */
+.stApp {
+    background: linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)),
+    url("https://images.unsplash.com/photo-1584982751601-97dcc096659c?q=80&w=1400&auto=format&fit=crop");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Fade animation */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Header gradient animation */
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
-}
-
+/* Title style */
 .main-title {
     font-size: 38px;
     font-weight: 700;
     text-align: center;
-    background: linear-gradient(90deg, #2E86C1, #48C9B0, #5DADE2);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradientMove 4s infinite alternate;
+    color: #2E86C1;
+    animation: fadeIn 1s ease-in-out;
 }
 
-.fade-in {
+/* Glass card */
+.glass {
+    padding: 25px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.6);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     animation: fadeIn 0.8s ease-in-out;
 }
 
-/* Animated result box */
+/* Result box */
 .result-box {
     padding: 18px;
     border-radius: 12px;
@@ -91,7 +99,9 @@ st.markdown("<div class='main-title'>🧠 Healthcare Stroke Risk Prediction</div
 st.markdown("<p style='text-align:center;'>Enter patient details to estimate stroke risk using ANN model</p>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
 
-# -------------------- USER INPUT --------------------
+# -------------------- INPUT SECTION --------------------
+st.markdown("<div class='glass'>", unsafe_allow_html=True)
+
 col1, col2 = st.columns(2)
 
 with col1:
@@ -108,6 +118,7 @@ with col2:
     bmi = st.number_input("BMI", min_value=0.0)
     smoking_status = st.selectbox("Smoking Status", OHE_smoke.categories_[0])
 
+st.markdown("</div>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
 
 # -------------------- ENCODING --------------------
@@ -116,16 +127,10 @@ married_encoded = label_encoder_married.transform([ever_married])[0]
 residence_encoded = label_encoder_residence.transform([residence_type])[0]
 
 smoke_encoded = OHE_smoke.transform([[smoking_status]]).toarray()
-smoke_df = pd.DataFrame(
-    smoke_encoded,
-    columns=OHE_smoke.get_feature_names_out(["smoking_status"])
-)
+smoke_df = pd.DataFrame(smoke_encoded, columns=OHE_smoke.get_feature_names_out(["smoking_status"]))
 
 work_encoded = OHE_work.transform([[work_type]]).toarray()
-work_df = pd.DataFrame(
-    work_encoded,
-    columns=OHE_work.get_feature_names_out(["work_type"])
-)
+work_df = pd.DataFrame(work_encoded, columns=OHE_work.get_feature_names_out(["work_type"]))
 
 input_data = pd.DataFrame({
     "gender": [gender_encoded],
@@ -149,17 +154,26 @@ if st.button("🔍 Predict Stroke Risk", use_container_width=True):
         prediction = model.predict(input_scaled)
         probability = float(prediction[0][0])
 
-    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("### Prediction Result")
 
     if probability > 0.5:
         st.markdown(
-            f"<div class='result-box' style='background:#fdecea;color:#c0392b;'>⚠️ High Stroke Risk<br>Probability: {probability:.2f}</div>",
+            f"<div class='result-box' style='background:#fdecea;color:#c0392b;'>⚠️ High Stroke Risk</div>",
             unsafe_allow_html=True
         )
     else:
         st.markdown(
-            f"<div class='result-box' style='background:#eafaf1;color:#1e8449;'>✅ Low Stroke Risk<br>Probability: {probability:.2f}</div>",
+            f"<div class='result-box' style='background:#eafaf1;color:#1e8449;'>✅ Low Stroke Risk</div>",
             unsafe_allow_html=True
         )
 
-    st.progress(probability)
+    st.markdown("### Risk Level")
+    risk_percent = int(probability * 100)
+
+    st.markdown(f"""
+    <div style="width:100%;background:#eee;border-radius:10px;overflow:hidden;">
+        <div style="width:{risk_percent}%;padding:10px;background:linear-gradient(90deg,#ff7675,#fdcb6e,#55efc4);text-align:center;font-weight:bold;">
+            {risk_percent}% Risk Probability
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
