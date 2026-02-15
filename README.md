@@ -99,6 +99,8 @@ ANN_Healthcare/
 ├── requirements.txt
 └── project.ipynb
 
+
+
 Folder Explanation
 
 ANN_model/ → Contains the trained neural network model
