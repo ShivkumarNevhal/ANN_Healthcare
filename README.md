@@ -78,27 +78,27 @@ Optimizer: Adam
 The model is trained using backpropagation and saved as an .h5 file for deployment.
 
 📂 Project Structure
+
 ANN_Healthcare/
-|
-|__ANN_model/
-│  |
-|  |__model.h5       
 │
-|__ Label-encoders/
-│   |__ encoder1.pkl
-│   |__ encoder2.pkl
-│   |__ encoder3.pkl
+├── ANN_model/
+│   └── model.h5
 │
-|__ One-hot-encoders/
-│   |__onehot1.pkl
-│   |__ onehot2.pkl
+├── Label-encoders/
+│   ├── encoder1.pkl
+│   ├── encoder2.pkl
+│   └── encoder3.pkl
 │
-|__ scaled_data/
-│   |__scaler.pkl
+├── One-hot-encoders/
+│   ├── onehot1.pkl
+│   └── onehot2.pkl
 │
-|__ app.py
-|__ requirements.txt
-|__ project.ipynb
+├── scaled_data/
+│   └── scaler.pkl
+│
+├── app.py
+├── requirements.txt
+└── project.ipynb
 
 
 
