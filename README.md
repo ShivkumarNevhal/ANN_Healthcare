@@ -79,28 +79,46 @@ The model is trained using backpropagation and saved as an .h5 file for deployme
 
 📂 Project Structure
 
+
 ANN_Healthcare/
+
 │
+
 ├── ANN_model/
-│   └── model.h5
+
+│        └── model.h5
+
 │
+
 ├── Label-encoders/
-│   ├── encoder1.pkl
-│   ├── encoder2.pkl
-│   └── encoder3.pkl
+
+│          ├── encoder1.pkl
+
+│          ├── encoder2.pkl
+
+│          └── encoder3.pkl
+
 │
+
 ├── One-hot-encoders/
-│   ├── onehot1.pkl
-│   └── onehot2.pkl
+
+│          ├── onehot1.pkl
+
+│          └── onehot2.pkl
+
 │
+
 ├── scaled_data/
-│   └── scaler.pkl
+
+│         └── scaler.pkl
+
 │
+
 ├── app.py
+
 ├── requirements.txt
+
 └── project.ipynb
-
-
 
 
 Folder Explanation
