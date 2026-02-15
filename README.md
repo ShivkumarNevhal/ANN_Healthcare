@@ -101,6 +101,7 @@ ANN_Healthcare/
 
 
 
+
 Folder Explanation
 
 ANN_model/ → Contains the trained neural network model
